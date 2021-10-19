@@ -1,0 +1,66 @@
+{
+  "name": "MyMovie",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "dateformat": "^3.0.3",
+    "native-base": "^2.13.14",
+    "react": "16.13.1",
+    "react-native": "0.63.2",
+    "react-native-gesture-handler": "^1.4.0",
+    "react-native-reanimated": "^1.13.0",
+    "react-native-screens": "^2.10.1",
+    "react-navigation": "^4.0.4",
+    "react-navigation-drawer": "^2.5.0",
+    "react-navigation-hooks": "^1.0.3",
+    "react-navigation-stack": "^1.7.3",
+    "react-navigation-tabs": "^2.9.0",
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.11.6",
+    "@babel/runtime": "7.11.2",
+    "@react-native-community/eslint-config": "1.1.0",
+    "@types/jest": "^26.0.13",
+    "@types/react": "^16.9.49",
+    "@types/react-native": "^0.63.15",
+    "@types/react-redux": "^7.1.9",
+    "@types/react-test-renderer": "^16.9.3",
+    "babel-jest": "25.5.1",
+    "eslint": "6.8.0",
+    "jest": "25.5.4",
+    "metro-react-native-babel-preset": "0.59.0",
+    "react-native-typescript-transformer": "^1.2.13",
+    "react-test-renderer": "16.13.1",
+    "ts-jest": "^26.3.0",
+    "typescript": "^4.0.2"
+  },
+  "jest": {
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "testPathIgnorePatterns": [
+      "\\.snap$",
+      "<rootDir>/node_modules/"
+    ],
+    "cacheDirectory": ".jest/cache"
+  }
+}
