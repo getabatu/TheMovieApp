@@ -16,7 +16,7 @@ export interface Props {
 
 const HeaderMenu: React.FC<Props> = (props) => {
     return (
-        <View style={{ justifyContent: 'space-between', width: width / 3.3, marginRight: 20, marginTop: 20, marginBottom: 40, }} >
+        <View style={{ justifyContent: 'space-between', width: width / 3.3, marginTop: 20, marginBottom: 40, }} >
             <View>
                 <Image
                     style={{ borderRadius: 10, resizeMode: 'stretch', width: '100%', height: width / 2.2, }}

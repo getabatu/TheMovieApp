@@ -73,7 +73,7 @@ export const setMoreUpcoming = (data: respondPageData): moviesActionTypes => ({
 });
 
 
-export const loadMoreUpcoming = () => {
+export const loadMoreUpcoming = (searchQuery: string) => {
   return (
     dispatch: Dispatch<moviesActionTypes>,
     getState: () => ReduxState,
@@ -84,8 +84,10 @@ export const loadMoreUpcoming = () => {
       },
     } = getState();
     if (!isLoading && currentPage !== totalPages && currentPage) {
-      fetch(`${APISettings.url}movie/upcoming?api_key=${APISettings.token}&language=en-US&page=${currentPage + 1}
-      `, {
+      let fetchURL = searchQuery ? `${APISettings.url}search/movie/upcoming?api_key=${APISettings.token}&query=${searchQuery}&language=en-US&page=1
+    `: `${APISettings.url}movie/upcoming?api_key=${APISettings.token}&language=en-US&page=1
+    `
+      fetch(fetchURL, {
         method: "GET"
       })
         .then(response => response.json())
@@ -105,27 +107,41 @@ export const loadMoreUpcoming = () => {
   };
 };
 
-export const loadMovies = () => {
+export const loadMovies = (searchQuery?: string) => {
   return async (dispath: Dispatch<moviesActionTypes>) => {
     dispath(setMovieLoading(['popular', 'upcoming', 'top_rated', 'now_playing']));
 
     // ------------------------------------------------------------
     // UPCOMING
-    await fetch(`${APISettings.url}movie/upcoming?api_key=${APISettings.token}&language=en-US&page=1
-    `, {
+    let fetchURL = searchQuery ? `${APISettings.url}search/movie/upcoming?api_key=${APISettings.token}&query=${searchQuery}&language=en-US&page=1
+    `: `${APISettings.url}movie/upcoming?api_key=${APISettings.token}&language=en-US&page=1
+    `
+    await fetch(fetchURL, {
       method: "GET"
     })
       .then(response => response.json())
       .then(async responseJson => {
-        dispath(
-          setMoviesUpcoming(
-            {
-              currentPage: responseJson.page,
-              movies: responseJson.results,
-              totalPages: responseJson.total_pages,
-            },
-          ),
-        );
+        if (responseJson.success === false) {
+          dispath(
+            setMoviesUpcoming(
+              {
+                currentPage: 0,
+                movies: [],
+                totalPages: 0,
+              },
+            ),
+          );
+        } else {
+          dispath(
+            setMoviesUpcoming(
+              {
+                currentPage: responseJson.page,
+                movies: responseJson.results,
+                totalPages: responseJson.total_pages,
+              },
+            ),
+          );
+        }
       })
       .catch(err => {
         Toast.show({

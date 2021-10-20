@@ -29,10 +29,14 @@ export function InfoScreen() {
       <HeaderMenu title={"Favourite Movies"} />
       <ImageBackground imageStyle={{}} style={{ width: '100%', height: '100%' }} source={require('../../assets/information.jpg')} >
         <FlatList
-          style={{ paddingLeft: 20, width: '100%', }}
-          numColumns={2}
+                  style={{ width: '100%', alignSelf: 'center' }}
+          numColumns={3}
           data={fav_movies}
           showsHorizontalScrollIndicator={false}
+          columnWrapperStyle={{
+            flex: 1,
+            justifyContent: "space-evenly"
+          }}
           ListFooterComponent={() => <View style={{ height: 80}} />}
           keyExtractor={(item: any) => `${item.id}`}
           renderItem={({ item }: { item: any }) => {
