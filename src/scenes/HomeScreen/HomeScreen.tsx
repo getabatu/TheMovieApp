@@ -15,10 +15,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   loadMovies,
   loadMoreUpcoming,
+  addRemoveFavouriteMovies,
 } from '../../store/movies/moviesActions';
 import { ReduxState } from '../../store/index';
 import { color } from '../../utils/globalVariable'
-import HeaderMenu from '../../components/header/headerMenu'
+import HeaderMenu from '../../components/headerMenu'
+import Poster from '../../components/poster'
 
 const height = Dimensions.get("window").height;
 const width = Dimensions.get("window").width;
@@ -26,12 +28,13 @@ const width = Dimensions.get("window").width;
 export function HomeScreen() {
   const dispatch = useDispatch();
   const onMomentum = useRef(true);
-  const [popular, upcoming, now_playing, top_rated, isLoading] = useSelector((state: ReduxState) => [
+  const [popular, upcoming, now_playing, top_rated, isLoading, fav_movies] = useSelector((state: ReduxState) => [
     state.movies.popular,
     state.movies.upcoming,
     state.movies.now_playing,
     state.movies.top_rated,
     state.movies.popular.isLoading && state.movies.upcoming.isLoading,
+    state.movies.fav_movies,
   ]);
   const getMovies = useCallback(() => {
     dispatch(loadMovies());
@@ -106,18 +109,17 @@ export function HomeScreen() {
                         showsHorizontalScrollIndicator={false}
                         keyExtractor={(item: any) => `${item.id}`}
                         renderItem={({ item }: { item: any }) => {
+                          let indexFav = fav_movies.map((e: any) => { return e.id; }).indexOf(item.id);
                           return (
-                            <View style={{ justifyContent: 'space-between', width: width / 3.3, marginRight: 20, marginTop: 20, marginBottom: 40, }} >
-                              <View>
-                                <Image
-                                  style={{ borderRadius: 10, resizeMode: 'stretch', width: '100%', height: width / 2.2, }}
-                                  source={{ uri: `https://image.tmdb.org/t/p/w300/${item.poster_path}` }}
-                                />
-                                <Text style={{ width: '100%', marginTop: 8, fontSize: 14, color: 'white' }} >
-                                  {item.title}
-                                </Text>
-                              </View>
-                            </View>
+                            <Poster
+                            isFav={indexFav !== -1 ? true : false}
+                              title={item.title}
+                              releaseDate={item.release_date}
+                              image={{ uri: `https://image.tmdb.org/t/p/w300/${item.poster_path}` }}
+                              onClickFav={() => { 
+                                dispatch(addRemoveFavouriteMovies(item))
+                              }}
+                            />
                           );
                         }}
                       />

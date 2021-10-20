@@ -10,7 +10,7 @@ export interface Props {
 
 };
 
-const TabComponent: React.FC<Props> = (props) => {
+const TabComponent: React.FC<Props> = (props: any) => {
     const {
         routes,
         index

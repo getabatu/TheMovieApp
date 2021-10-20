@@ -25,6 +25,7 @@ const initialState: initMovieState = {
     currentPage: null,
     totalPages: null,
   },
+  fav_movies: [],
 };
 
 export function moviesReducer(
@@ -95,6 +96,22 @@ export function moviesReducer(
           movies: [...state.upcoming.movies, ...action.payload.results],
           totalPages: action.payload.total_pages,
         },
+      };
+    }
+
+    case 'FAVOURITE_MOVIE': {
+      let newArray: any = state.fav_movies
+      let dataPayload: any = action.payload
+      let indexFav = state.fav_movies.map((e: any) => { return e.id; }).indexOf(dataPayload.id);
+      if(indexFav >= 0) {
+        newArray.splice(indexFav, 1);
+      } else {
+        newArray.push(dataPayload)
+      }
+
+      return {
+        ...state,
+        fav_movies: newArray,
       };
     }
     default:

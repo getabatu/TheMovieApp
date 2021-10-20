@@ -4,6 +4,7 @@ export const LOAD_MOVIES_TOP_RATED = 'LOAD_MOVIES_TOP_RATED';
 export const LOAD_MOVIES_NOW_PLAYING = 'LOAD_MOVIES_NOW_PLAYING';
 export const LOAD_MOVIES_POPULAR = 'LOAD_MOVIES_POPULAR';
 export const LOAD_MORE_UPCOMING = 'LOAD_MORE_UPCOMING';
+export const FAVOURITE_MOVIE = 'FAVOURITE_MOVIE';
 
 
 export type initMovieState = {
@@ -11,6 +12,7 @@ export type initMovieState = {
   popular: respondData;
   now_playing: respondData;
   upcoming: respondData;
+  fav_movies: any;
 }
 
 export type loadMoviesUpcoming ={
@@ -73,10 +75,16 @@ export type respondData = {
   totalPages: null | number;
 }
 
+export type favouriteMovies = {
+  type: typeof FAVOURITE_MOVIE;
+  payload: []
+}
+
 export type moviesActionTypes =
   | loadMoviesPopular
   | loadMoviesNowPlaying
   | loadMoviesTopRated
   | loadMoviesUpcoming
   | respondLoadingState
-  | isLoadMoreUpcoming;
+  | isLoadMoreUpcoming
+  | favouriteMovies;

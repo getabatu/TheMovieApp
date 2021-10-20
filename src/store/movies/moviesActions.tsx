@@ -4,9 +4,9 @@ import {
   LOAD_MOVIES_TOP_RATED,
   LOAD_MOVIES_NOW_PLAYING,
   LOAD_MOVIES_POPULAR,
-  respondMovieData,
   initMovieState,
   respondLoadingState,
+  FAVOURITE_MOVIE,
   SET_MOVIE_LOADING,
   respondPageData,
   LOAD_MORE_UPCOMING,
@@ -25,7 +25,7 @@ export const setMovieLoading = (
 });
 
 export const setMoviesNowPlaying = (
-  now_playing: respondMovieData,
+  now_playing: any,
 ): moviesActionTypes => ({
   type: LOAD_MOVIES_NOW_PLAYING,
   payload: {
@@ -34,7 +34,7 @@ export const setMoviesNowPlaying = (
 });
 
 export const setMoviesPopular = (
-  popular: respondMovieData,
+  popular: any,
 ): moviesActionTypes => ({
   type: LOAD_MOVIES_POPULAR,
   payload: {
@@ -43,7 +43,7 @@ export const setMoviesPopular = (
 });
 
 export const setMoviesTopRated = (
-  top_rated: respondMovieData,
+  top_rated: any,
 ): moviesActionTypes => ({
   type: LOAD_MOVIES_TOP_RATED,
   payload: {
@@ -52,12 +52,19 @@ export const setMoviesTopRated = (
 });
 
 export const setMoviesUpcoming = (
-  upcoming: respondMovieData,
+  upcoming: any,
 ): moviesActionTypes => ({
   type: LOAD_MOVIES_UPCOMING,
   payload: {
     upcoming,
   },
+});
+
+export const addFavouriteMovies = (
+  data: any,
+): moviesActionTypes => ({
+  type: FAVOURITE_MOVIE,
+  payload: data,
 });
 
 export const setMoreUpcoming = (data: respondPageData): moviesActionTypes => ({
