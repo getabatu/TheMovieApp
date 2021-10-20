@@ -60,7 +60,7 @@ export const setMoviesUpcoming = (
   },
 });
 
-export const addFavouriteMovies = (
+export const addRemoveFavouriteMovies = (
   data: any,
 ): moviesActionTypes => ({
   type: FAVOURITE_MOVIE,
